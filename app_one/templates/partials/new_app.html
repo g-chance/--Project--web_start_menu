@@ -1,0 +1,73 @@
+
+{% load static %}
+<div class="row row-1">
+    <h1>Add an App</h1>
+    <div>
+        <button class="add_app">
+            <a class="close_window" href="/ajax_close">Close</a>
+        </button>
+    </div>
+</div>
+
+<form id="add_app_form" action="/rd/add_app" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="userid" value="{{request.session.userid}}">
+    <label for="app_name">App Name:
+    {% for message in messages %}
+        {% if 'app_name' in message.tags %}
+        <p class="{{message.tags}}">{{message}}</p>
+        {% endif %}
+    {% endfor %}
+    </label>
+    <input type="text" name="app_name">
+
+    <label for="url">URL:
+    {% for message in messages %}
+        {% if 'url' in message.tags %}
+        <p class="{{message.tags}}">{{message}}</p>
+        {% endif %}
+    {% endfor %}
+    </label>
+    <input type="text" name="url">
+
+    <label for="image">Image:
+    {% for message in messages %}
+        {% if 'image' in message.tags %}
+        <p class="{{message.tags}}">{{message}}</p>
+        {% endif %}
+    {% endfor %}
+    </label>
+    <select name="image" id="">
+        {% for image in images %}
+        <option value="{{image.id}}">{{image.name}}</option>
+        {% endfor %}
+    </select>
+
+    <label class="lab_cat" for="category">Category:
+    {% for message in messages %}
+        {% if 'category' in message.tags %}
+        <p class="{{message.tags}}">{{message}}</p>
+        {% endif %}
+    {% endfor %}
+        <img id="cat_img" class="hidden" src="{% static 'img/left-arrow.png' %}" alt="">
+    </label>
+    <select id="cat_select" name="category" id="">
+        <option value="None" selected hidden>Add a Category (optional)</option>
+        <option value="None">(Uncategorized)</option>
+        {% for cat in usercats %}
+            {% if cat != None %}
+        <option value="{{cat.name}}">{{cat.name}}</option>
+            {% endif %}
+        {% endfor %}
+        <option id="new_cat">--Add New</option>
+    </select>
+
+    <input id="cat_in" class="hidden" type="text" name="category" placeholder="Enter a New Category" disabled>
+    <input id="tut_added_app" class="submit" type="submit" value="Add">
+</form>
+
+{% if request.session.intro_tut_active == True %}
+<div class="tut" id="tut-2">
+    Click "Add" after entering the required information. The App will then show up in your dashboard on the right. Try adding a new app now!
+</div>
+{% endif %}

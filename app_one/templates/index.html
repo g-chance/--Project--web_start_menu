@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/default.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    
+    <script>
+        $(document).ready(function(){
+            $('#in_first_name').keyup(function(){
+                data = $('#reg_form').serialize()
+                $.ajax({
+                    method: 'post',
+                    url: '/ajax_reg_first_name',
+                    data: data,
+                })
+                .done(function(x){
+                    $('#lab_first_name').html(x)
+                })
+            })
+            $('#in_last_name').keyup(function(){
+                data = $('#reg_form').serialize()
+                $.ajax({
+                    method: 'post',
+                    url: '/ajax_reg_last_name',
+                    data: data,
+                })
+                .done(function(x){
+                    $('#lab_last_name').html(x)
+                })
+            })
+            $('#in_email').keyup(function(){
+                data = $('#reg_form').serialize()
+                $.ajax({
+                    method: 'post',
+                    url: '/ajax_reg_email',
+                    data: data,
+                })
+                .done(function(x){
+                    $('#lab_email').html(x)
+                })
+            })
+        })
+    </script>
+
+</head>
+<body>
+    <nav>
+        <div class="nav">
+            <h3 class="col">Welcome to my WABSITE</h3>
+            <div class="col col-2 nav-2">
+                <a href="#"></a>
+            </div>
+        </div>
+    </nav>
+    <div class="spacer">
+        &nbsp
+    </div>
+    <div class="container">
+        <div class="con gr-2">
+            <div class="col left">
+                <h1>Register</h1>
+                <form id="reg_form" action="/rd/reg" method="post">
+                    {% csrf_token %}
+                    <label id="lab_first_name" for="first_name">First Name:
+                    {% for message in messages %}
+                        {% if 'first_name' in message.tags %}
+                        <p class="{{message.tags}}">{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                    </label>
+                    <input id="in_first_name" type="text" name="first_name">
+                    <label id="lab_last_name" for="last_name">Last Name:
+                    {% for message in messages %}
+                        {% if 'last_name' in message.tags %}
+                        <p class="{{message.tags}}">{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                    </label>
+                    <input id="in_last_name" type="text" name="last_name">
+                    <label id="lab_email" for="email">Email:
+                    {% for message in messages %}
+                        {% if 'email' in message.tags %}
+                        <p class="{{message.tags}}">{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                    </label>
+                    <input id="in_email" type="text" name="email">
+                    <label for="password">Password:
+                    {% for message in messages %}
+                        {% if 'reg_pw' in message.tags %}
+                        <p class="{{message.tags}}">{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                    </label>
+                    <input type="password" name="password">
+                    <label for="confirm_password">Confirm Password:
+                    {% for message in messages %}
+                        {% if 'confirm_pw' in message.tags %}
+                        <p class="{{message.tags}}">{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                    </label>
+                    <input type="password" name="confirm_password">
+                    <input class="submit" type="submit" value="Register">
+                </form>
+            </div>
+            <div class="col col-2 right">
+                <h1>Login</h1>
+                <form action="/rd/login" method="post">
+                    {% csrf_token %}
+                    <label for="email">Email:
+                    {% for message in messages %}
+                        {% if 'login_em' in message.tags %}
+                        <p class="{{message.tags}}">{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                    </label>
+                    <input type="text" name="email">
+                    <label for="password">Password:
+                    {% for message in messages %}
+                        {% if 'login_pw' in message.tags %}
+                        <p class="{{message.tags}}">{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                    </label>
+                    <input type="password" name="password">
+                    <input class="submit" type="submit" value="Login">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

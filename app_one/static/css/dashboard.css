@@ -1,0 +1,287 @@
+@import url('default.css');
+
+
+/* DASHBOARD GRID COL-1 */
+.left {
+    margin-top: 21.44px;
+}
+    .left .welcome{
+        margin-top: 0;
+    }
+        .left h1 button {
+            position: absolute;
+            width: 20px;
+            height: 3px;
+            margin: 0 0 0 -5px;
+            border: none;
+            cursor: pointer;
+        }
+    .left .intro {
+        padding: 0 25px;
+        font-size: 18px;
+        text-align: justify;
+    }
+        .left .intro span {
+            font-size: 25px;
+        }
+
+        .left .lab_cat img {
+            display: inline-block;
+            vertical-align: middle;
+            width: 15px;
+            margin: 0 0 -4px 60px;
+            padding: 2px;
+            border-radius: 50%;
+            border: 1px solid grey;
+            background-color: rgba(125, 125, 125, 0.5);
+        }
+
+
+    /* PARTIALS */
+        /* APP INFO */
+    .l-app-info {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        margin: 0 0 20px 0;
+        background-color: rgb(55, 55, 55);
+    }
+        .l-app-info * {
+            margin: 0;
+        }
+        .l-app-info div {
+            display: grid;
+            grid-template-columns: auto auto;
+            justify-self: right;
+            align-self: center;
+        }
+        .l-app-info .add_app {
+            width: 50px;
+            margin-right: 10px;
+            background-color: red;
+            box-shadow: 0 0 4px white;
+        }
+            .l-app-info .add_app a {
+                font-size: 14px;
+                text-decoration: none;
+                color: white;
+            }
+        .l-app-info .orange {
+            background-color: rgb(255, 174, 0);
+            margin-right: 2px;
+        }
+
+    .l-app-info-2 {
+        display: grid;
+        grid-template-columns: 150px .75fr;
+        row-gap: 20px;
+        padding-left: 10px;
+        color: rgb(55, 55, 55);
+    }
+    #app_info .add_app {
+        background-color: rgb(255, 174, 0);
+    }
+        /* #app_info .add_app a {
+            color: black;
+        } */
+
+
+/* DASHBOARD COL-2 */
+.right {
+    display: grid;
+    direction: rtl;
+}
+    .right .row-1 {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        margin: 21.44px 0 0 0;
+        direction: ltr;
+        background-color: rgb(55, 55, 55);
+    }
+        .right .row-1 .exit_mode {
+            align-self: center;
+            margin: 1px 12px 0 0;
+        }
+            .right .row-1 .exit_mode button {
+                width: 80px;
+                background-color: red;
+                box-shadow: 0 0 4px white;
+            }
+                .right .row-1 .exit_mode button a {
+                    font-size: 14px;
+                    text-decoration: none;
+                    color: white;
+                }
+        .right .row-1 * {
+            margin: 0;
+        }
+
+    /* DASHBOARD COL-2 DROPDOWN */
+    .right .dropdown {
+        justify-self: right;
+        align-self: center;
+        margin-right: 5px;
+        padding: 5px;
+        direction: rtl;
+    }
+    .right .tut-dropdown {
+        border-radius: 50%;
+        box-shadow: 0 0 5px white;
+        background-color: rgba(119, 199, 0, 0.81);
+    }
+        .right .dropbtn div {
+            width: 25px;
+            height: 4px;
+            margin: 4px 0;
+            background-color: white;
+        }
+        .right .dropdown-content {
+            display: none;
+            position: absolute;
+            z-index: 4;
+        }
+        .right .dropdown:hover .dropdown-content {
+            display: block;
+            box-shadow: 2px 2px 2px black;
+        }
+            .right .dropdown-content button {
+                display: block;
+                width: 140px;
+                padding: 5px;
+                font-size: 14px;
+                text-align: left;
+                cursor: pointer;
+                color: white;
+                background-color: rgba(0, 145, 255, 1);
+                
+            }
+            .right .dropdown-content .edit {
+                background-color: rgb(255, 174, 0);
+            }
+            .right .dropdown-content .info {
+                background-color: rgb(15, 165, 1);
+            }
+            .right .dropdown-content .delete {
+                background-color: red;
+            }
+            .right .dropdown-content a {
+                color: white;
+            }
+    /* END DASHBOARD COL-2 DROPDOWN */
+
+    .right h4 {
+        display: grid;
+        justify-content: right;
+        padding: 2px 5px;
+        margin: 10px 0;
+        direction: ltr;
+        color: white;
+        background-image: linear-gradient(90deg, rgba(255,255,255,0), rgb(15, 165, 0));
+    }
+    .right .gr-5 {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        row-gap: 10px;
+        justify-items: center;
+        align-items: flex-start;
+    }
+    .right .tutorial {
+        direction: ltr;
+    }
+    .right .gr-5 .col-1 {
+        margin-top: 0px;
+    }
+        .right .gr-5 label {
+            direction: ltr;
+        }
+        .right .gr-5 img {
+            width: 36px;
+            justify-self: center;
+            margin-bottom: 8px;
+            padding: 6px;
+            border: 4px ridge greenyellow;
+            border-radius: 12px;
+            box-shadow: 2px 2px 5px black;
+            background-color: rgba(0, 145, 255, .5);
+            
+        }
+        .right .tutorial img {
+            border: 4px solid rgba(125, 125, 125, 0.5);
+            background-color: rgba(125, 125, 125, 0.5);
+        }
+        .right .gr-5 * {
+            display: grid;
+            text-align: center;
+            text-shadow: 0 0 10px white;
+            color: black;
+        }
+        .right .gr-5 .col-1 .delete {
+            position: sticky;
+            width: 10px;
+            margin: -70px 0 0 45px;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: red;
+        }
+        .right .gr-5 .col-1 .info {
+            background-color: rgb(255, 174, 0);
+        }
+
+
+/* TUTORIALS */
+.tut {
+    position: absolute;
+    background-color: white;
+    width: 400px;
+    direction: ltr;
+    padding: 5px;
+    box-shadow: 0 0 10px red;
+}
+#tut-1 {
+    margin: 30px 50px 0 0;
+}
+#tut-2 {
+    margin: 0 0 0 70px;
+}
+#tut-3 {
+    margin: 30px 50px 0 0;
+}
+#tut-4 {
+    margin: 70px 0 0 152px;
+    text-align: left;
+}
+#tut-5 {
+    margin: -15px 0 0 55px;
+    text-align: left;
+}
+#tut-6 {
+    margin: 0 0 0 70px;
+}
+#tut-7 {
+    margin: 30px 50px 0 0;
+}
+#tut-8 {
+    margin: 70px 0 0 152px;
+    text-align: left;
+}
+#tut-9 {
+    margin: 0 0 0 -425px;
+    text-align: left;
+}
+#tut-img {
+    position: absolute;
+    margin: -14px 0 0 414px;
+    width: 5px;
+}
+
+
+
+
+/* JQUERY */
+.hidden {
+    display: none;
+    visibility: hidden;
+}
+#cat_in {
+    box-shadow: 2px 2px 2px black;
+}

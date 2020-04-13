@@ -1,0 +1,161 @@
+
+/* body * {
+    outline: 1px solid black;
+} */
+
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body:after {
+    content: "";
+    display: block;
+    position: fixed;
+    z-index: -2;   
+    width: 100%;
+    height: 100%;
+    background: url('/static/img/sand.jpeg');
+    background-color: rgb(174, 174, 174);
+    background-size: cover;
+    background-attachment: fixed;
+    opacity: .5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+/* NAV */
+nav {
+    position: fixed;
+    z-index: 5;
+    left: 0;
+    right: 0;
+    color: white;
+    background-color: rgb(55, 55, 55);
+}
+.nav {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    width: 1200px;
+    margin: auto;
+    padding: 0 10px;
+}
+    .nav-1 img {
+        width: 30px;
+        margin: 0 5px -7px 0;
+    }
+    .nav-1 h3 {
+        display: inline-block;
+        width: 75%;
+    }
+.nav-2 {
+    justify-self: right;
+    align-self: center;
+}
+    .nav-2 .link {
+        display: inline-block;
+        margin-left: 10px;
+    }
+        .nav-2 .dropdown a {
+            color: white;
+        }
+        .nav-2 .dropdown-content {
+            display: none;
+            position: absolute;
+            z-index: 4;
+        }
+        .nav-2 .dropdown:hover .dropdown-content {
+            display: block;
+            background-color: rgb(75, 75, 75);
+            box-shadow: 2px 2px 2px black;
+            margin-left: -48px;
+        }
+            .nav-2 .dropdown-content * {
+                display: block;
+                padding: 4px 4px 4px 4px;
+            }
+
+/* SPACER */
+.spacer {
+    height: 55px;
+}
+
+/* CONTAINER */
+.container {
+    width: 1200px;
+    min-height: 1000px;
+    margin: auto;
+    padding: 0 10px 20px 10px;
+    box-shadow: inset 0 0 0 1000px rgba(225, 225, 225, 0.5);
+}
+
+/* INNER GRID */
+.gr-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+    /* padding: 0 10px; */
+}
+.right {
+    align-content: flex-start;
+}
+
+
+
+
+/* GENERIC ELEMENTS */
+h1 {
+    padding: 2px 10px 5px 10px;
+    color: white;
+    background-color: rgb(55, 55, 55);
+}
+form {
+    display: grid;
+    grid-template-columns: 150px .75fr;
+    row-gap: 20px;
+    padding-left: 10px;
+    color: rgb(55, 55, 55);
+}
+form .error {
+    position: absolute;
+    z-index: 0;
+    margin: -35px 0 0 150px;
+    color: red;
+}
+form .submit {
+    grid-column: 1/3;
+    width: 100px;
+    justify-self: right;
+    margin: 10px 0;
+    color: white;
+    background-color: rgb(55, 55, 55);
+    box-shadow: 1px 1px 2px black;
+}
+
+
+
+
+/* MEDIA QUERIES */
+@media only screen and (max-width: 1200px) {
+    nav .nav {
+        width: 95%
+    }
+    .container {
+        width: 95%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .gr-2 {
+        grid-template-columns: 1fr;
+        padding: 0 25px;
+    }
+    .left .row-1 div {
+        grid-template-columns: auto;
+        margin: 5px 0;
+    }
+    .right h1 {
+        text-align: left;
+    }
+}

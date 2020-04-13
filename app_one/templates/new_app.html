@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <nav>
+        <div class="dash nav-con">
+            <div>
+                <img src="{% static 'img/Flat-Nintendo-Icons/PNG/Star.png/' %}" alt="">
+                <h3 class="col">Let's add a new app, {{user.first_name}}!</h3>
+            </div>
+            <div class="col col-2">
+                <a href="/dashboard">Dashboard</a>
+                <a href="/rd/logout">Logout</a>
+            </div>
+        </div>
+    </nav>
+    <div class="spacer">
+        &nbsp
+    </div>
+    <div class="new_app dash container">
+        <div class="con-1">
+            <div class="col">
+                <h1>Add an App</h1>
+                <form action="/rd/add_app" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="userid" value="{{request.session.userid}}">
+                    <label for="app_name">App Name:
+                    {% for message in messages %}
+                        {% if 'app_name' in message.tags %}
+                        <p class="{{message.tags}}">{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                    </label>
+                    <input type="text" name="app_name">
+                    <label for="url">URL:
+                    {% for message in messages %}
+                        {% if 'url' in message.tags %}
+                        <p class="{{message.tags}}">{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                    </label>
+                    <input type="text" name="url" value="http://">
+                    <label for="image">Image:
+                    {% for message in messages %}
+                        {% if 'image' in message.tags %}
+                        <p class="{{message.tags}}">{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                    </label>
+                    <input type="text" name="image">
+                    <label for="category">Category:
+                    {% for message in messages %}
+                        {% if 'reg_pw' in message.tags %}
+                        <p class="{{message.tags}}">{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                    </label>
+                    <input type="category" name="category">
+                    <input class="submit" type="submit" value="Add">
+                </form>
+            </div>
+            <div class="col col-2">
+                <h1>Your Apps</h1>
+                <h4>Tutorials</h4>
+                <div class="con-1 tutorial">
+                    <div>
+                        <img src="{% static 'img/Flat-Nintendo-Icons/PNG_GRAY/Bricks.png' %}" alt="">
+                        <label for="">App</label>
+                    </div>
+                </div>
+                <h4>Personal Management</h4>
+                <div class="con-1">
+                    <div>
+                        <img src="{% static 'img/Flat-Nintendo-Icons/PNG/Bricks.png/' %}" alt="">
+                        <label for="">App</label>
+                    </div>
+                    <div>
+                        <img src="{% static 'img/Flat-Nintendo-Icons/PNG/Fire-Flower.png' %}" alt="">
+                        <label for="">App</label>
+                    </div>
+                    <div>
+                        <img src="{% static 'img/Flat-Nintendo-Icons/PNG/Ice-Flower.png/' %}" alt="">
+                        <label for="">App</label>
+                    </div>
+                    <div>
+                        <img src="{% static 'img/Flat-Nintendo-Icons/PNG/Kirby.png/' %}" alt="">
+                        <label for="">App</label>
+                    </div>
+                    <div>
+                        <img src="{% static 'img/Flat-Nintendo-Icons/PNG/Pikachu.png/' %}" alt="">
+                        <label for="">App</label>
+                    </div>
+                </div>
+                <h4>Finance</h4>
+                <div class="con-1">
+                    <div>
+                        <img src="{% static 'img/Flat-Nintendo-Icons/PNG/Pokeball.png/' %}" alt="">
+                        <label for="">App</label>
+                    </div>
+                </div>
+                <h4>Other</h4>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

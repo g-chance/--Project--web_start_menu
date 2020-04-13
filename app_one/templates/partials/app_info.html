@@ -1,0 +1,35 @@
+
+<div class="partial">
+<div class="row l-app-info">
+    <h1>App Information:</h1>
+    <div>
+        <button class="add_app orange" id="tutut5">
+            <a class="edit_app" href="/ajax_edit_app/{{user.app.id}}">Edit</a>
+        </button>
+        <button id="tutut5" class="add_app">
+            <a class="close_window" href="/ajax_close">Close</a>
+        </button>
+    </div>
+    {% if request.session.intro_tut_active == True %}
+    <div id="tut-5" class="tut">
+        Here you can see all of the app's information. If you want to edit the app, you can click on the "Edit" button to the right.
+    </div>
+    {% endif %}
+</div>
+<div class="row l-app-info-2">
+    <div>App Name:</div>
+    <div>{{user.app.name}}</div>
+    <div>URL:</div>
+    <div>{{user.url}}</div>
+    <div>Image:</div>
+    <div>{{user.image.name}}</div>
+    <div>Category:</div>
+    <div>{{user.category.name}}</div>
+    <div>Popular Categories &nbsp for this App:</div>
+    <div>
+    {% for cat in cats %}
+        <p>{{cat.name}}</p>
+    {% endfor %}
+    </div>
+</div>
+</div>

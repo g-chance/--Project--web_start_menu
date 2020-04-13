@@ -1,0 +1,74 @@
+
+{% load static %}
+<div class="row l-app-info">
+    <h1>App Information:</h1>
+    <div>
+        <button class="add_app">
+            <a id="add_app" href="/ajax_app_info/{{user.app.id}}">Back</a>
+        </button>
+    </div>
+</div>
+
+<form action="/rd/edit_app" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="userid" value="{{request.session.userid}}">
+    <label for="app_name">App Name:
+    {% for message in messages %}
+        {% if 'app_name' in message.tags %}
+        <p class="{{message.tags}}">{{message}}</p>
+        {% endif %}
+    {% endfor %}
+    </label>
+    <div>{{user.app.name}}</div>
+    <input type="hidden" name="app_id" value="{{user.app.id}}">
+
+    <label for="url">URL:
+    {% for message in messages %}
+        {% if 'url' in message.tags %}
+        <p class="{{message.tags}}">{{message}}</p>
+        {% endif %}
+    {% endfor %}
+    </label>
+    <input type="text" name="url" value="{{user.url}}">
+
+    <label for="image">Image:
+    {% for message in messages %}
+        {% if 'image' in message.tags %}
+        <p class="{{message.tags}}">{{message}}</p>
+        {% endif %}
+    {% endfor %}
+    </label>
+    <select name="image" id="">
+        {% for image in images %}
+        <option value="{{image.id}}" {% if user.image.id == image.id %} selected {% endif %}>{{image.name}}</option>
+        {% endfor %}
+    </select>
+
+    <label class="lab_cat" for="category">Category:
+    {% for message in messages %}
+        {% if 'category' in message.tags %}
+        <p class="{{message.tags}}">{{message}}</p>
+        {% endif %}
+    {% endfor %}
+        <img id="cat_img" class="hidden" src="{% static 'img/left-arrow.png' %}" alt="">
+    </label>
+    <select id="cat_select" name="category" id="">
+        <option value="None" selected hidden>Add a Category (optional)</option>
+        <option value="None">(Uncategorized)</option>
+        {% for cat in usercats %}
+            {% if cat != None %}
+        <option value="{{cat.name}}" {% if user.category.name == cat.name %} selected {% endif %}>{{cat.name}}</option>
+            {% endif %}
+        {% endfor %}
+        <option id="new_cat">--Add New</option>
+    </select>
+
+    <input id="cat_in" class="hidden" type="text" name="category" placeholder="Enter a New Category" disabled>
+    <input id="tut_app_updated" class="submit" type="submit" value="Update">
+</form>
+
+{% if request.session.intro_tut_active == True %}
+<div class="tut" id="tut-6">
+    After making your desired changes, click "Update" to save the information.
+</div>
+{% endif %}

@@ -1,0 +1,6 @@
+Email:
+{% for message in messages %}
+{% if 'email' in message.tags %}
+<p class="{{message.tags}}">{{message}}</p>
+{% endif %}
+{% endfor %}

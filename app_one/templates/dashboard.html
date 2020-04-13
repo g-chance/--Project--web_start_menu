@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+    <style>
+        body:after {
+            content: "";
+            display: block;
+            position: fixed;
+            z-index: -2;   
+            width: 100%;
+            height: 100%;
+            background: url('{{user.background.link}}');
+            background-color: rgb(174, 174, 174);
+            background-size: cover;
+            background-attachment: fixed;
+            opacity: .8;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('#intro_tut').click(function(e){
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr("href"),
+                method: "get",
+            })
+            .done(function(res){
+                $('#tut-1').toggleClass('hidden')
+                $('#dropdown').addClass('tut-dropdown')
+            })
+        })
+        $('#tut_new_app').click(function(e){
+            console.log($(this).attr("href"))
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr("href"),
+                method: "get",
+            })
+            .done(function(res){
+                $('.l-partials').html(res);
+            })
+        })
+        $('.tut_ima').click(function(e){
+            e.preventDefault();
+            $('#tut-4').toggleClass('hidden');
+        })
+        $('.tut_dma').click(function(){
+            $('#tut-8').toggleClass('hidden');
+        })
+        $('#tut_conclude').click(function(){
+            $('#tut-8').toggleClass('hidden');
+        })
+
+        $('.info_link').click(function(e){
+            console.log("THAS WARK?")
+            e.preventDefault();
+            $.ajax({
+                url: $(this).attr("href"),
+                method: 'get',
+            })
+            .done(function(res){
+                $('.l-partials').html(res)
+            })
+        })
+        $('#info_mode_active').click(function(e){
+            e.preventDefault();
+            $('.info_link').removeClass('hidden');
+            $('.asdf').addClass('hidden');
+            $('.exit_mode').removeClass('hidden')
+        })
+        $('#del_mode_active').click(function(e){
+            e.preventDefault();
+            $('.info_link').addClass('hidden');
+            $('.asdf').removeClass('hidden');
+            $('.exit_mode').removeClass('hidden')
+        })
+        $('.exit_mode').click(function(e){
+            e.preventDefault();
+            $('.info_link').addClass('hidden');
+            $('.asdf').addClass('hidden');
+            $('.exit_mode').addClass('hidden');
+        })
+
+        // $('#tut_added_app').click(function(){
+        //     $('#tut-3').toggleClass('hidden');
+        // })
+        // $('#tut_del').click(function(e){
+        //     e.preventDefault();
+        //     $.ajax({
+        //         url: $(this).attr("href"),
+        //         method: "get",
+        //     })
+        //     .done(function(res){
+        //         $('#tut-8').toggleClass('hidden');
+        //         $('#tut-9').toggleClass('hidden');
+        //     })
+        // })
+
+        $(document).ajaxComplete(function(e, xhr, settings){
+            
+            // In edit_app.html
+            $('#add_app').click(function(e){
+                console.log("THAS WARK?")
+                e.preventDefault();
+                $.ajax({
+                    url: $(this).attr("href"),
+                    method: 'get',
+                })
+                .done(function(res){
+                    $('.l-partials').html(res)
+                })
+            })
+            // End
+
+            add_app_bool = false
+            $('#tut_added_app').click(function(e){
+                if(add_app_bool == false){
+                    e.preventDefault();
+                }
+                if(add_app_bool == false){
+                    data = $('#add_app_form').serialize();
+                    $.ajax({
+                        url: '/ajax_add_app_errors',
+                        method: "post",
+                        data: data,
+                    })
+                    .done(function(res){
+                        print
+                        if(res['success']){
+                            add_app_bool = true
+                            $('#tut_added_app').click()
+                        }
+                        else{
+                            $('.l-partials').html(res);
+                        }
+                    })
+                }
+            })
+            $('#tut_app_updated').click(function(){
+                console.log("UH OH")
+                $('#tut-7').toggleClass('hidden')
+            })
+
+            $('.edit_app').click(function(e){
+                e.preventDefault()
+                $.ajax({
+                    url: $('.edit_app').attr("href"),
+                    method: "get",
+                })
+                .done(function(res){
+                    $('.l-partials').html(res)
+                })
+            })
+            $('#cat_select').change(function(){
+                var selectedText = $(this).find(':selected').text();
+                if(selectedText == "--Add New"){
+                    $('#cat_select').addClass('hidden')
+                    $('#cat_in').removeClass('hidden')
+                    $('#cat_in').removeAttr('disabled')
+                    $('#cat_img').removeClass('hidden')
+                }
+            })
+            $('#cat_img').click(function(){
+                $('#cat_select').removeClass('hidden')
+                $('#cat_in').addClass('hidden')
+                $('#cat_in').attr('disabled')
+                $('#cat_img').addClass('hidden')
+                $('#cat_select').prop("selectedIndex",0)
+            })
+            $('.close_window').click(function(e){
+                e.preventDefault();
+                console.log($(this).attr("href"));
+                $.ajax({
+                    url: $(this).attr("href"),
+                    method: 'get',
+                })
+                .done(function(res){
+                    $('.l-partials').html(res)
+                })
+            })
+            // $('.info_link').click(function(e){
+            //     e.preventDefault();
+            //     $('#tut-4').toggleClass('hidden');
+            //     $.ajax({
+            //         url: $(this).attr("href"),
+            //         method: 'get',
+            //     })
+            //     .done(function(res){
+            //         $('.l-partials').html(res)
+            //     })
+            // })
+        })
+
+    })
+</script>
+
+</head>
+
+<!-- HTML START -->
+<body>
+
+<!-- NAV -->
+    <nav>
+        <div class="nav">
+            <div class="col nav-1">
+                <img src="{% static 'img/Flat-Nintendo-Icons/PNG/Star.png/' %}" alt="">
+                <h3 class="col">Welcome, {{user.first_name}}!</h3>
+            </div>
+            <div class="col nav-2">
+                <div class="link dropdown">
+                    <a class="drop-btn" href="">Settings</a>
+                    <div class="dropdown-content">
+                        <a href="/rd/change_bg/0">None</a>
+                        {% for background in backgrounds %}
+                        <a href="/rd/change_bg/{{background.id}}">{{background.name}}</a>
+                        {% endfor %}
+                        <a href="/rd/reset_intro_tut">Reset Tutorial</a>
+                    </div>
+                </div>
+                <div class="link">
+                    <a href="/rd/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+<!-- SPACER -->
+    <div class="spacer"></div>
+
+
+<!-- CONTAINER -->
+    <div class="container dash">
+
+<!-- INNER GRID -->
+        <div class="con gr-2">
+
+<!-- GRID COLUMN 1 -->
+            <div class="col left" id="dash_col-1">
+                {% if intro_tut_done == True %}
+                <div class="l-welcome">
+                    <h1 class="welcome">
+                        <a href="/rd/minimize_welcome">
+                            <button></button>
+                        </a>
+                    </h1>
+                    {% if not request.session.min_welc %}
+                    <p class="intro"><span>W</span>elcome to the Start Menu of the web! This site is intended to serve as the homepage of your browser,
+                        and act as a hub for easy access to all of your web applications, akin to the Start Menu on Windows or the
+                        Applications folder on MacOS.</p>
+                    <p class="intro">To your right, you'll see a list of tutorials. Click on the "Intro" tutorial to start learning how to use the site!</p>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+    <!-- AJAX PARTIALS! -->
+                <div class="l-partials">
+                    <!-- app_info.html -->
+                    <!-- edit_app.html -->
+                    <!-- new_app.html -->
+                </div>
+    <!-- END AJAX PARTIALS -->
+
+<!-- END COLUMN 1 -->
+            </div>
+
+<!--GRID COLUMN 2 -->
+            <div class="col col-2 right">
+
+                <div class="row row-1">
+                    <h1>Your Apps</h1>
+                    <div class="exit_mode hidden">
+                        <button>
+                            <a href="exit_mode">Disable</a>
+                        </button>
+                    </div>
+                    <div id="dropdown" class="dropdown">
+                        <div class="dropbtn">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <div class="dropdown-content">
+                            <a id="tut_new_app" href="/ajax_new_app">
+                                <button>Add App</button>
+                            </a>
+                            <a id="info_mode_active" class="tut_ima" href="/rd/info_mode">
+                                <button class="info" class="edit">Info/Edit Mode</button>
+                            </a>
+                            <a id="del_mode_active" class="tut_dma" href="#">
+                                <button id="tut_del_mode" class="delete">Delete Mode</button>
+                            </a>
+                            <a href="/rd/tutorial">
+                                <button class="edit">Show/Hide Tutorials</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden tut" id="tut-1">
+                    You can hover over the "hamburger" menu to the right (the 3 white stacked horizontal lines) at anytime to add, edit, or delete apps. Try it now and click on "Add App"!
+                </div>
+                {% if request.session.intro_tut_add_app == True %}
+                <div class="tut" id="tut-3">
+                    Once you've added an app, you can change 'modes'. Hover over the icon again and select "Info/Edit Mode".
+                </div>
+                {% endif %}
+                {% if request.session.intro_tut_edit_app == True %}
+                <div class="tut" id="tut-7">
+                    Finally, if you want to delete an app, hover over the icon and select "Delete Mode".
+                </div>
+                {% endif %}
+
+<!-- APP GRID -->
+                {% if user.tutorial_row == True %}
+                <h4>Tutorials</h4>
+                <div class="row gr-5 tutorial">
+                    <div class="col">
+                        <a id="intro_tut" href="/ajax_activate_intro_tut">
+                            <img src="{% static 'img/Flat-Nintendo-Icons/PNG_GRAY/Bricks.png' %}" alt="">
+                        </a>
+                        <label for="">{{intro_tut.name}}</label>
+                    </div>
+                    {% if request.session.intro_tut_active == True %}
+                    <div id="4" class="hidden tut">
+                        With Info/Edit Mode active, click on the exclamation point that shows up next to an app to view its information:
+                    </div>
+                    <div id="tut-8" class="hidden tut">
+                        With Delete Mode active, click on the star that shows up next to an app to delete it from your dashboard.
+                        <a id="tut_conclude" href="/rd/intro_tut_complete">
+                            <img id="tut-img" src="{% static 'img/Flat-Nintendo-Icons/PNG/Star.png/' %}" alt="">
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% if request.session.final_tut == True %}
+                    <div id="tut-9" class="tut">
+                        That concludes the tutorial! Have fun creating your personal App Dashboard!
+                        <a href="">
+                            <img id="tut-img" src="{% static 'img/Flat-Nintendo-Icons/PNG/Star.png/' %}" alt="">
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+                {% for cat in usercats %}
+                {% if cat != None %}
+                <h4>{{cat}}</h4>
+                <div class="row gr-5">
+                    {% for app in appscats %}
+                        {% if app.category.name == cat %}
+                    <div class="col col-1">
+                        <a href="{{app.url}}">
+                            <img src="{% static ''%}img/{{app.image.link}}" alt="">
+                            <a class="asdf hidden" href="/rd/delete_app/{{app.app.id}}">
+                                <img class="delete" src="{% static 'img/Flat-Nintendo-Icons/PNG/Star.png/' %}" alt="">
+                            </a>
+                            <a class="info_link hidden" href="/ajax_app_info/{{app.app.id}}">
+                                <img class="info delete" src="{% static 'img/Flat-Nintendo-Icons/PNG/Star.png/' %}" alt="">
+                            </a>
+                        </a>
+                        <label for="">{{app.app.name}}</label>
+                    </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% endfor %}
+                
+                {% if nocat == True %}
+                <h4>Uncategorized</h4>
+                <div class="row gr-5">
+                {% for app in appscats %}
+                    {% if app.category == None %}
+                    <div class="col col-1">
+                        <a href="{{app.app.url}}">
+                            <img src="{% static ''%}img/{{app.image.link}}" alt="">
+                            <a class="asdf hidden" href="/rd/delete_app/{{app.app.id}}">
+                                <img class="delete" src="{% static 'img/Flat-Nintendo-Icons/PNG/Star.png/' %}" alt="">
+                            </a>
+                            <a class="info_link hidden" href="/ajax_app_info/{{app.app.id}}">
+                                <img class="info delete" src="{% static 'img/Flat-Nintendo-Icons/PNG/Star.png/' %}" alt="">
+                            </a>
+                        </a>
+                        <label for="">{{app.app.name}}</label>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+                </div>
+                {% endif %}
+
+<!-- END COLUMN 2 -->
+            </div>
+
+<!-- END INNER GRID -->
+        </div>
+
+<!-- END CONTAINER -->
+    </div>
+</body>
+</html>
