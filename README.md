@@ -8,9 +8,5 @@
 -Frameworks: Django</br>
 -Database: SQLite</br>
 
-<strong>Process:</strong></br>
-
-<strong>What I Learned:</strong></br>
-
 <strong>Demo:</strong></br>
 -Coming soon!</br>
